@@ -158,18 +158,7 @@ body {
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
-@import url(
-    https://fonts.googleapis.com/css?family=Open+Sans:400,
-    300,
-    600,
-    700,
-    800,
-    300italic,
-    400italic,
-    600italic,
-    700italic,
-    800italic
-); //error?
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,300italic,400italic,600italic,700italic,800italic"); //error?
 
 $heading-font-family: "Montserrat", sans-serif;
 $paragraph-font-family: "Open Sans", sans-serif;
