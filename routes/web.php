@@ -27,19 +27,15 @@ Route::get('/reserve/{sid}', 'ReserveController@index')->name('reserve.index');
 Route::post('/reserve/{sid}/store', 'ReserveController@store');
 Route::get('/reserve/{sid}/success/{seat}', 'ReserveController@success');
 
-
 Route::get('/profile/{id}/edit','ProfileController@index')->name('profile.edit');
 Route::get('/profile/{id}/pict','ProfileController@editPict')->name('profile.pict');
 Route::post('/profile/{id}/pict','ProfileController@updatePict')->name('profile.pictUp');
 Route::patch('/profile/{id}','ProfileController@update')->name('profile.update');
 
 //Route::get('/{sort}', 'HomeController@sort')->name('home.sort')->middleware();
-
-
 Route::get('/history/{user}', 'HistoryController@index');
-
 Route::get('/sort/{by}', 'HomeController@sort')->name('home.sort');
-Route::get('/home/{time}', 'HomeController@reserve')->name('home.reserve');
+Route::get('/home/{mid}/{time}', 'HomeController@reserve')->name('home.reserve');
 
 
 
