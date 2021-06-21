@@ -58,17 +58,16 @@ class HomeController extends Controller
     {
         $movie = Movie::find($id);
         $screening_id = DB::table('screening')->where('movie_id', $id)->pluck('id');
-        $screening_room = DB::table('screening')->where('movie_id', $id)->pluck('auditorium_id');
         $screening_time = DB::table('screening')->where('movie_id', $id)->orderBy('time', 'asc')->pluck('time');
-        $counter = count($screening_id);
         if(!$screening_id->isEmpty()) {
             $i = 0;
             while(true) {
-                $seat = DB::table('auditorium')->where('id', $screening_room[$i])->value('seats_no');
+                $screening_room = DB::table('screening')->where('id', $screening_id[$i])->value('auditorium_id');
+                $seat = DB::table('auditorium')->where('id', $screening_room)->value('seats_no');
                 $count_tickets = DB::table('reservation')->where('screening_id', $screening_id[$i])->count();
                 if($count_tickets >= $seat) {
                     $i++;
-                    if($i >= $counter) {
+                    if($i >= count($screening_id)) {
                         $screening_id = '';
                         break;
                     }
@@ -82,7 +81,7 @@ class HomeController extends Controller
         } else if($screening_id->isEmpty()) {
             $screening_id = '';
         }
-
+        // dd($screening_id);
         return view('movie.show', [
             'movie' => $movie,
             'screening' => $screening_id,
@@ -90,8 +89,26 @@ class HomeController extends Controller
         ]);
     }
 
-    public function reserve($time) {
-        $screening_id = DB::table('screening')->where('time', $time)->value('id');
+    public function reserve($mid, $time) {
+        $screening_id = DB::table('screening')->where('time', $time)->where('movie_id', $mid)->pluck('id');
+        $i = 0;
+        while(true) {
+            $auditorium_id = DB::table('screening')->where('id', $screening_id[$i])->value('auditorium_id');
+            $count_seats = DB::table('auditorium')->where('id', $auditorium_id)->value('seats_no');
+            $count_tickets = DB::table('reservation')->where('screening_id', $screening_id[$i])->count();
+            if($count_tickets >= $count_seats) {
+                $i++;
+                if($i >= count($screening_id)) {
+                    return redirect()->route('movie.show', $mid);
+                }
+                continue;
+            } else if($count_tickets < $count_seats) {
+                $screening_id = $screening_id[$i];
+                break;
+            }
+        }
+        // dd($count_tickets);
+        // dd($count_seats);
         return redirect()->route('reserve.index', $screening_id);
     }
 }

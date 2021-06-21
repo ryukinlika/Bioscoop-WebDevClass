@@ -28,14 +28,16 @@
         </div>
     </div>
 
+    <div class="container">
     {{-- Search --}}
-    <div class="container mt-5">
-        <h3><strong>Looking for something to watch?</strong></h3>
-        <div class="search">
-            <input type="text" name="search" id="myInput" maxlength= "30" placeholder="e.g. Interstellar" class="search-bar">
+        <div class="container mt-5">
+            <h3><strong>Looking for something to watch?</strong></h3>
+            <div class="search">
+                <input type="text" name="search" id="myInput" maxlength= "30" placeholder="e.g. Interstellar" class="search-bar">
+            </div>
         </div>
+        {{-- Search --}}
     </div>
-    {{-- Search --}}
 
     {{-- Filter --}}
     <div class="container">
@@ -109,7 +111,6 @@
                 <a href="{{ route('movie.show', $movie->id)}}" id="{{ $movie->title }}" class="movie-title text-decoration-none">
                     <div class="col-4 mt-4">
                         <div class="movie">
-                            <div class="menu"><i class="material-icons"></i></div>
                             <div class="movie-img" style="background-image: url('{{ asset($movie->posterpath) }}');"></div>
                             <div class="text-movie-cont">
                                 <div class="mr-grid">
@@ -133,22 +134,19 @@
                                 </div>
                             </div>
                             <div class="mr-grid">
-                                    <p class="movie-description">{{ $movie->sypnosis }}</p>
-                                <div>
-                                    <div class="mr-grid actors-row ml-4">
-                                        <div class="col1">
-                                            <p class="movie-actors">
-                                                @foreach($movie->casts as $actor)
-                                                    @if($loop->index == 0){{$actor}}
-                                                    @else{{", ".$actor}}
-                                                    @endif
-                                                @endforeach
-                                            </p>
-                                        </div>
+                                <div class="mr-grid actors-row ml-4">
+                                    <div class="col1">
+                                        <p class="movie-actors">
+                                            @foreach($movie->casts as $actor)
+                                                @if($loop->index == 0){{$actor}}
+                                                @else{{", ".$actor}}
+                                                @endif
+                                            @endforeach
+                                        </p>
                                     </div>
-                                    <div class="mr-grid actors-row ml-3 synopsis">
-                                        {{$movie->synopsis}}
-                                    </div>
+                                </div>
+                                <div class="mr-grid actors-row ml-3 synopsis">
+                                    {{$movie->synopsis}}
                                 </div>
                             </div>
                         </div>

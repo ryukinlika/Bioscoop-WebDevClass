@@ -12,7 +12,7 @@
     <title>Bioscoop</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
 
@@ -27,7 +27,7 @@
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link rel = "icon" href ="/img/film-roll.png"type = "image/x-icon">
 
-
+    @stack('assets')
 
 </head>
 
@@ -100,9 +100,9 @@
                   yeet
               </p>
             </div>
-  
+
             <div class="col-xs-6 col-md-3">
-              
+
             </div>
             <div class="col-xs-6 col-md-3">
               <h6>Members:</h6>
@@ -113,7 +113,7 @@
                 <li><a href="/home">Ryukin Aranta Lika</a></li>
               </ul>
             </div>
-  
+
           </div>
           <hr>
         </div>
@@ -126,7 +126,7 @@
           </div>
         </div>
      </footer>
-     
+
      @stack('scripts')
 
 </body>

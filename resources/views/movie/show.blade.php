@@ -63,12 +63,13 @@
             <div class="row">
                 @foreach($screening_time as $time)
                     <div class="col-sm-4">
-                        <a href="{{route('home.reserve', $time)}}" class="btn btn-2" value="{{$time}}">{{date("h:i a", strtotime($time))}}</a>
+                        <a href="{{route('home.reserve', [$movie->id , $time])}}" class="btn btn-2" value="{{$time}}">{{date("h:i a", strtotime($time))}}</a>
                     </div>
                 @endforeach
             </div>
         </div>
         <h2 style="color:white">{{ ($screening != '') ? "" : "No seats available!" }}</h2>
+
     </div>
     <div class="blur_back" style="background-image: url('/{{ $movie->posterpath }}')"></div>
 </div>
